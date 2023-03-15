@@ -14,6 +14,7 @@ import {
   parse,
   startOfToday,
 } from 'date-fns';
+import { ko } from 'date-fns/locale';
 import { CALENDAR_FORMAT } from '@/app/constants';
 
 function classNames(...classes: any[]) {
@@ -33,8 +34,6 @@ export default function Calendar({ selected, onChange }: Props) {
   const [currentMonth, setCurrentMonth] = useState(
     format(today.current ?? Date.now(), CALENDAR_FORMAT),
   );
-
-  console.log('투데이: ', today.current);
 
   // 이번 달의 첫번째 날짜를 구한다.
   let firstDayCurrentMonth = parse(currentMonth, CALENDAR_FORMAT, new Date());
@@ -61,10 +60,11 @@ export default function Calendar({ selected, onChange }: Props) {
     setCurrentMonth(format(firstDayNextMonth, CALENDAR_FORMAT));
   }, [firstDayCurrentMonth]);
 
-  console.log('currentMonth', currentMonth, firstDayCurrentMonth);
-
   // TODO: handleChange
-  const handleChange = useCallback((day: Date) => {}, []);
+  const handleChange = useCallback((day: Date) => {
+    console.log('선택 날짜: ', day);
+    setSelectedDay(day);
+  }, []);
 
   useEffect(() => {
     if (!today.current) {
@@ -73,46 +73,51 @@ export default function Calendar({ selected, onChange }: Props) {
   }, []);
 
   useEffect(() => {
-    if (!selected) {
-      setSelectedDay(today.current!);
+    if (!selected && today.current) {
+      setSelectedDay(today.current);
     }
   }, [selected]);
 
-  console.log('selectedDay', selectedDay);
-
   return (
-    <div className="overflow-hidden shadow sm:rounded-md">
+    <article className="overflow-hidden shadow-lg sm:rounded-md">
       <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
-        <div className="mx-auto max-w-md px-4 sm:px-7 md:max-w-4xl md:px-6">
-          <div className="flex items-center">
-            <h2 className="flex-auto font-semibold text-slate-900">
-              {format(firstDayCurrentMonth, 'MMMM yyyy')}
-            </h2>
+        <div className="mx-auto max-w-md border px-4 py-3 sm:px-7 md:max-w-4xl md:px-6">
+          <header className="flex items-center">
             <button
+              aria-label="Go to previous month"
+              title="지난 달"
               type="button"
               onClick={previousMonth}
               className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
             >
-              <span className="sr-only">Previous month</span>
+              <span className="sr-only">지난 달</span>
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
             </button>
+
+            <h2 className="flex-auto text-center font-semibold text-slate-900">
+              {format(firstDayCurrentMonth, 'yyyy년 M월', { locale: ko })}
+            </h2>
+
             <button
               onClick={nextMonth}
               type="button"
+              aria-label="Go to next month"
+              title="다음 달"
               className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
             >
-              <span className="sr-only">Next month</span>
+              <span className="sr-only">다음 달</span>
               <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
             </button>
-          </div>
+          </header>
+
           <div className="mt-10 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
-            <div>S</div>
-            <div>M</div>
-            <div>T</div>
-            <div>W</div>
-            <div>T</div>
-            <div>F</div>
-            <div>S</div>
+            <div>일</div>
+            <div>월</div>
+            <div>화</div>
+            <div>수</div>
+            <div>목</div>
+            <div>금</div>
+            <div>토</div>
           </div>
           <div className="mt-2 grid grid-cols-7 text-sm">
             {days.map((day, dayIdx) => (
@@ -158,7 +163,7 @@ export default function Calendar({ selected, onChange }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
