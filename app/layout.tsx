@@ -3,6 +3,16 @@ import './globals.css';
 export const metadata = {
   title: 'Ovulation Calculator',
   description: 'Calculate your ovulation date',
+  keywords: 'nextjs, tailwindcss, ovulation, tailwindcss, typescript',
+
+  // Open Graph
+  openGraph: {
+    type: 'website',
+    title: 'Ovulation Calculator',
+    description: 'Calculate your ovulation date',
+    siteName: 'Ovulation Calculator',
+    images: '',
+  },
 };
 
 export default function RootLayout({
