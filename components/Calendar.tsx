@@ -111,7 +111,7 @@ export default function Calendar({ selected, onChange }: Props) {
           </header>
 
           <div className="mt-10 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
-            <div>일</div>
+            <div className="text-red-500">일</div>
             <div>월</div>
             <div>화</div>
             <div>수</div>
