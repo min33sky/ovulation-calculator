@@ -4,7 +4,7 @@ import Calendar from './Calendar';
 import CycleLength from './CycleLength';
 import Headline from './Headline';
 import Input from './Input';
-import Outcome from './Outcome';
+import Outcomes from './Outcomes';
 
 export default function Calculator() {
   return (
@@ -66,7 +66,7 @@ export default function Calculator() {
 
         <div className="mt-6">
           {/* TODO: lastPeriod && cycleLength가 True여야 보여주기 */}
-          <Outcome
+          <Outcomes
             fertileWindow={[]}
             expectedDueDate={null}
             nextPeriod={null}

@@ -1,3 +1,4 @@
+import { Nanum_Gothic } from 'next/font/google';
 import './globals.css';
 
 export const metadata = {
@@ -15,6 +16,12 @@ export const metadata = {
   },
 };
 
+const nanumGothic = Nanum_Gothic({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-nanum-gothic',
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -22,7 +29,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-slate-100">{children}</body>
+      <body
+        className={`min-h-screen bg-slate-100 ${nanumGothic.variable} font-nanum-gothic`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
