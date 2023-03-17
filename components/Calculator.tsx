@@ -66,6 +66,11 @@ export default function Calculator() {
     changeLastPeriod(date);
   };
 
+  const handleReset = () => {
+    changeCycleLength(0);
+    changeLastPeriod(null);
+  };
+
   return (
     <article className="my-10 md:col-span-2">
       <div className="space-y-6 bg-white">
@@ -116,7 +121,7 @@ export default function Calculator() {
                   <Button
                     aria-label="Reset Button"
                     title="초기화"
-                    onClick={() => window.alert('TODO: Reset')}
+                    onClick={handleReset}
                     disabled={false}
                   >
                     초기화
