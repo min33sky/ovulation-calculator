@@ -23,7 +23,7 @@ function classNames(...classes: any[]) {
 
 interface Props {
   selected: Date | null;
-  onChange: () => void;
+  onChange: (value: Date) => void;
 }
 
 export default function Calendar({ selected, onChange }: Props) {
@@ -61,10 +61,15 @@ export default function Calendar({ selected, onChange }: Props) {
   }, [firstDayCurrentMonth]);
 
   // TODO: handleChange
-  const handleChange = useCallback((day: Date) => {
-    console.log('선택 날짜: ', day);
-    setSelectedDay(day);
-  }, []);
+  const handleChange = useCallback(
+    (day: Date) => {
+      console.log('선택 날짜: ', day);
+      console.log('타입: ', typeof day);
+      setSelectedDay(day);
+      onChange(day);
+    },
+    [onChange],
+  );
 
   useEffect(() => {
     if (!today.current) {

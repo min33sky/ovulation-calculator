@@ -8,8 +8,10 @@ import Input from './Input';
 import Outcomes from './Outcomes';
 
 export default function Calculator() {
-  const { lastPeriod, cycleLength, changeCycleLength } = useFormContext();
+  const { lastPeriod, cycleLength, changeCycleLength, changeLastPeriod } =
+    useFormContext();
 
+  // TODO: console.log 삭제
   console.log('lastPeriod: ', lastPeriod);
   console.log('cycle_length: ', cycleLength);
 
@@ -27,6 +29,13 @@ export default function Calculator() {
     changeCycleLength(value);
   };
 
+  /**
+   * 마지막 생리일 변경 핸들러
+   */
+  const handleLastPeriodChange = (date: Date) => {
+    changeLastPeriod(date);
+  };
+
   return (
     <article className="my-10 md:col-span-2">
       <div className="space-y-6 bg-white">
@@ -39,7 +48,10 @@ export default function Calculator() {
               />
 
               <div className="mt-6">
-                <Calendar selected={lastPeriod} onChange={() => {}} />
+                <Calendar
+                  selected={lastPeriod}
+                  onChange={handleLastPeriodChange}
+                />
               </div>
             </div>
           </div>
