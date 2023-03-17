@@ -51,7 +51,7 @@ export function calculateExpectedDueDate(lastPeriod: number | Date) {
 }
 
 /**
- *
+ * 날짜를 포맷팅하는 함수
  * @param date
  * @param formatString
  * @returns

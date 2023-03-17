@@ -22,14 +22,17 @@ export default function Outcomes({
   pregnancyTestDay,
   expectedDueDate,
 }: Props) {
+  if (!ovulationDate || !nextPeriod || !pregnancyTestDay || !expectedDueDate)
+    return null;
+
   return (
-    <div className="px-3">
+    <div className="px-2 py-3 shadow-lg">
       <Headline
         primary="결과"
         secondary="배란일을 예측하여 당신의 가임 기간을 알아보세요."
       />
 
-      <div className="mt-5 grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
         <Card
           date={`${toFormatted(
             fertileWindow[0]!,
@@ -40,25 +43,25 @@ export default function Outcomes({
         />
 
         <Card
-          date={toFormatted(ovulationDate ?? Date.now(), PUBLIC_DATE_FORMAT)}
+          date={toFormatted(ovulationDate, PUBLIC_DATE_FORMAT)}
           title="배란일"
           description="배란일은 여성의 월경 주기에서 난자가 난소에서 방출되고 잠재적으로 수정될 수 있는 날입니다."
         />
 
         <Card
-          date={toFormatted(nextPeriod ?? Date.now(), PUBLIC_DATE_FORMAT)}
+          date={toFormatted(nextPeriod, PUBLIC_DATE_FORMAT)}
           title="다음 생리일"
           description="당신의 생리주기를 통해 예상되는 다음 생리 날짜입니다."
         />
 
         <Card
-          date={toFormatted(pregnancyTestDay ?? Date.now(), PUBLIC_DATE_FORMAT)}
+          date={toFormatted(pregnancyTestDay, PUBLIC_DATE_FORMAT)}
           title="임신 테스트 날짜"
           description="임신 테스트 날짜는 여성이 임신 여부를 확인하기 위해 임신 테스트를 받는 날짜를 말합니다."
         />
 
         <Card
-          date={toFormatted(expectedDueDate ?? Date.now(), PUBLIC_DATE_FORMAT)}
+          date={toFormatted(expectedDueDate, PUBLIC_DATE_FORMAT)}
           title="예상 출산일"
           description="예상 출산일(EDD)은 임산부의 아기가 태어날 것으로 예상되는 날짜입니다. 실제 날짜는 며칠 또는 몇 주 정도 차이가 날 수 있습니다."
         />

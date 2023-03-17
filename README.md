@@ -8,3 +8,7 @@
 - Next.js
 - TypeScript
 - Tailwind CSS
+
+## Reference
+
+- [Ovulation Calculator](https://ovulation-calculator.vercel.app/)
