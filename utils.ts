@@ -1,16 +1,17 @@
 import { addDays, addWeeks, format, isValid } from 'date-fns';
 import { DATE_FORMAT } from './app/constants';
+import { ko } from 'date-fns/locale';
 
 /**
  * 가임기 계산 함수
  * @param ovulationDate 배란일
  * @returns [가임기 시작일, 가임기 종료일]
  */
-export function calculateFertileWindow(ovulationDate: Date) {
+export function calculateFertileWindow(ovulationDate: Date): [Date, Date] {
   const fertileWindowStart = addDays(ovulationDate, -5);
   const fertileWindowEnd = addDays(ovulationDate, 1);
 
-  return [fertileWindowStart, fertileWindowEnd] as const;
+  return [fertileWindowStart, fertileWindowEnd];
 }
 
 /**
@@ -23,7 +24,7 @@ export function calculateFertileWindow(ovulationDate: Date) {
  * @param cycleLength 생리 주기
  */
 export function calculateOvulationDate(
-  lastPeriod: number,
+  lastPeriod: number | Date,
   cycleLength: number,
 ) {
   return addDays(lastPeriod, cycleLength - 14);
@@ -34,15 +35,18 @@ export function calculateOvulationDate(
  * @param lastPeriod 지난 생리일
  * @param cycleLength 생리 주기
  */
-export function calculateNextPeriod(lastPeriod: number, cycleLength: number) {
+export function calculateNextPeriod(
+  lastPeriod: number | Date,
+  cycleLength: number,
+) {
   return addDays(lastPeriod, cycleLength);
 }
 
-export function calculatePregnancyTestDay(lastPeriod: number) {
+export function calculatePregnancyTestDay(lastPeriod: number | Date) {
   return addWeeks(lastPeriod, 2);
 }
 
-export function calculateExpectedDueDate(lastPeriod: number) {
+export function calculateExpectedDueDate(lastPeriod: number | Date) {
   return addWeeks(lastPeriod, 40);
 }
 
@@ -57,7 +61,7 @@ export function toFormatted(date: number | Date, formatString = DATE_FORMAT) {
     return null;
   }
 
-  return format(date, formatString);
+  return format(date, formatString, { locale: ko });
 }
 
 /**
@@ -65,7 +69,10 @@ export function toFormatted(date: number | Date, formatString = DATE_FORMAT) {
  * @param lastPeriod 마지막 생리일
  * @param cycleLength 생리주기
  */
-export function calculateOutcomes(lastPeriod: number, cycleLength: number) {
+export function calculateOutcomes(
+  lastPeriod: number | Date,
+  cycleLength: number,
+) {
   const ovulationDate = calculateOvulationDate(lastPeriod, cycleLength);
   const fertileWindow = calculateFertileWindow(ovulationDate);
   const nextPeriod = calculateNextPeriod(lastPeriod, cycleLength);

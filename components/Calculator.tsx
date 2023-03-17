@@ -1,5 +1,7 @@
 import { useFormContext } from '@/contexts/formContext';
-import React from 'react';
+import { useOutcomesContext } from '@/contexts/outcomesContext';
+import { calculateOutcomes } from '@/utils';
+import React, { useEffect } from 'react';
 import Button from './Button';
 import Calendar from './Calendar';
 import CycleLength from './CycleLength';
@@ -11,9 +13,37 @@ export default function Calculator() {
   const { lastPeriod, cycleLength, changeCycleLength, changeLastPeriod } =
     useFormContext();
 
-  // TODO: console.log 삭제
-  console.log('lastPeriod: ', lastPeriod);
-  console.log('cycle_length: ', cycleLength);
+  const {
+    changeExpectedDueDate,
+    changeFertileWindow,
+    changeNextPeriod,
+    changeOvulationDate,
+    changePregnancyTestDay,
+    expectedDueDate,
+    fertileWindow,
+    nextPeriod,
+    ovulationDate,
+    pregnancyTestDay,
+  } = useOutcomesContext();
+
+  useEffect(() => {
+    if (lastPeriod && cycleLength) {
+      const {
+        expectedDueDate,
+        fertileWindow,
+        nextPeriod,
+        ovulationDate,
+        pregnancyTestDay,
+      } = calculateOutcomes(lastPeriod, cycleLength);
+
+      changeNextPeriod(nextPeriod);
+      changeExpectedDueDate(expectedDueDate);
+      changeOvulationDate(ovulationDate);
+      changePregnancyTestDay(pregnancyTestDay);
+      changeFertileWindow(fertileWindow);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cycleLength, lastPeriod]);
 
   /**
    * 생리 주기 변경 핸들러
@@ -98,14 +128,15 @@ export default function Calculator() {
         </div>
 
         <div className="mt-6">
-          {/* TODO: lastPeriod && cycleLength가 True여야 보여주기 */}
-          <Outcomes
-            fertileWindow={[Date.now(), Date.now()]}
-            expectedDueDate={null}
-            nextPeriod={null}
-            ovulationDate={null}
-            pregnancyTestDay={null}
-          />
+          {lastPeriod && cycleLength && (
+            <Outcomes
+              fertileWindow={fertileWindow}
+              expectedDueDate={expectedDueDate}
+              nextPeriod={nextPeriod}
+              ovulationDate={ovulationDate}
+              pregnancyTestDay={pregnancyTestDay}
+            />
+          )}
         </div>
       </div>
     </article>

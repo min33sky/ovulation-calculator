@@ -1,5 +1,5 @@
 const DATE_FORMAT = 'dd/MM/yyyy';
 const CALENDAR_FORMAT = 'MMM-yyyy';
-const PUBLIC_DATE_FORMAT = 'dd MMM, yyyy';
+const PUBLIC_DATE_FORMAT = 'yy년 MMM d일';
 
 export { DATE_FORMAT, CALENDAR_FORMAT, PUBLIC_DATE_FORMAT };

@@ -3,14 +3,14 @@ import { Nanum_Gothic } from 'next/font/google';
 import './globals.css';
 
 export const metadata = {
-  title: 'Ovulation Calculator',
+  title: '배란일 계산기',
   description: 'Calculate your ovulation date',
   keywords: 'nextjs, tailwindcss, ovulation, tailwindcss, typescript',
 
   // Open Graph
   openGraph: {
     type: 'website',
-    title: 'Ovulation Calculator',
+    title: '배란일 계산기',
     description: 'Calculate your ovulation date',
     siteName: 'Ovulation Calculator',
     images: '',

@@ -5,7 +5,7 @@ import Card from './Card';
 import Headline from './Headline';
 
 interface Props {
-  fertileWindow: [number, number];
+  fertileWindow: [Date, Date] | [null, null];
   ovulationDate: Date | null;
   nextPeriod: Date | null;
   pregnancyTestDay: Date | null;
@@ -32,9 +32,9 @@ export default function Outcomes({
       <div className="mt-5 grid grid-cols-1 gap-6 md:grid-cols-3">
         <Card
           date={`${toFormatted(
-            fertileWindow[0],
+            fertileWindow[0]!,
             PUBLIC_DATE_FORMAT,
-          )} - ${toFormatted(fertileWindow[1], PUBLIC_DATE_FORMAT)}`}
+          )} - ${toFormatted(fertileWindow[1]!, PUBLIC_DATE_FORMAT)}`}
           title="가임기"
           description="가임기는 여성이 임신 가능성이 가장 높은 기간으로, 일반적으로 배란기 즈음에 발생합니다."
         />

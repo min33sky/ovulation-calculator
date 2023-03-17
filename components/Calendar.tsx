@@ -60,11 +60,8 @@ export default function Calendar({ selected, onChange }: Props) {
     setCurrentMonth(format(firstDayNextMonth, CALENDAR_FORMAT));
   }, [firstDayCurrentMonth]);
 
-  // TODO: handleChange
   const handleChange = useCallback(
     (day: Date) => {
-      console.log('선택 날짜: ', day);
-      console.log('타입: ', typeof day);
       setSelectedDay(day);
       onChange(day);
     },
