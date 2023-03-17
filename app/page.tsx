@@ -12,9 +12,9 @@ export default function Home() {
               배란일 계산기
             </h2>
             <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              배란 주기를 결정하세요.
+              당신의 배란일을 알아봅시다.
             </p>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600">
+            <p className="mx-auto mt-6 max-w-2xl break-keep text-justify text-lg leading-8 text-gray-600 ">
               이 계산기를 사용하여 배란 가능성이 높은 시기를 식별하여 가임일을
               파악하세요. 생리 기간은 사람마다 다르고, 달마다 다를 수 있기
               때문에 이 도구는 여러분이 자신의 주기를 더 잘 이해할 수 있도록

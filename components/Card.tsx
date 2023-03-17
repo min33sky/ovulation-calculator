@@ -17,7 +17,7 @@ export default function Card({ date, title, description }: Props) {
       <h3 className="mt-5 text-base font-medium tracking-tight text-white">
         {title}
       </h3>
-      <p className="mt-2 text-sm text-slate-400">{description}</p>
+      <p className="mt-2 break-keep text-sm text-slate-400">{description}</p>
     </article>
   );
 }

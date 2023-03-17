@@ -5,7 +5,7 @@ import Card from './Card';
 import Headline from './Headline';
 
 interface Props {
-  fertileWindow: [Date, Date];
+  fertileWindow: [number, number];
   ovulationDate: Date | null;
   nextPeriod: Date | null;
   pregnancyTestDay: Date | null;
@@ -23,10 +23,10 @@ export default function Outcomes({
   expectedDueDate,
 }: Props) {
   return (
-    <>
+    <div className="px-3">
       <Headline
-        primary="Outcomes"
-        secondary="Start tracking your ovulation today and take control of your fertility journey."
+        primary="결과"
+        secondary="배란일을 예측하여 당신의 가임 기간을 알아보세요."
       />
 
       <div className="mt-5 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -35,34 +35,34 @@ export default function Outcomes({
             fertileWindow[0],
             PUBLIC_DATE_FORMAT,
           )} - ${toFormatted(fertileWindow[1], PUBLIC_DATE_FORMAT)}`}
-          title="Fertile Window"
-          description="The fertile window is the time period in which a woman is most likely to conceive, typically occurring around the time of ovulation."
+          title="가임기"
+          description="가임기는 여성이 임신 가능성이 가장 높은 기간으로, 일반적으로 배란기 즈음에 발생합니다."
         />
 
         <Card
           date={toFormatted(ovulationDate ?? Date.now(), PUBLIC_DATE_FORMAT)}
-          title="Ovulation Date"
-          description="Ovulation date is the day in a woman's menstrual cycle when an egg is released from the ovary and can potentially be fertilized."
+          title="배란일"
+          description="배란일은 여성의 월경 주기에서 난자가 난소에서 방출되고 잠재적으로 수정될 수 있는 날입니다."
         />
 
         <Card
           date={toFormatted(nextPeriod ?? Date.now(), PUBLIC_DATE_FORMAT)}
-          title="Next Period Date"
-          description="The Next Period Date is the date when a women's menstrual cycle is expected to begin again after the previous period."
+          title="다음 생리일"
+          description="당신의 생리주기를 통해 예상되는 다음 생리 날짜입니다."
         />
 
         <Card
           date={toFormatted(pregnancyTestDay ?? Date.now(), PUBLIC_DATE_FORMAT)}
-          title="Pregnancy Test Datee"
-          description="A pregnancy test date refers to the date on which a woman takes a pregnancy test to determine if she is pregnant."
+          title="임신 테스트 날짜"
+          description="임신 테스트 날짜는 여성이 임신 여부를 확인하기 위해 임신 테스트를 받는 날짜를 말합니다."
         />
 
         <Card
           date={toFormatted(expectedDueDate ?? Date.now(), PUBLIC_DATE_FORMAT)}
-          title="Expected Due Date"
-          description="The expected due date (EDD) is the date that a pregnant woman's baby is expected to be born. The actual due date may vary by a few days or weeks."
+          title="예상 출산일"
+          description="예상 출산일(EDD)은 임산부의 아기가 태어날 것으로 예상되는 날짜입니다. 실제 날짜는 며칠 또는 몇 주 정도 차이가 날 수 있습니다."
         />
       </div>
-    </>
+    </div>
   );
 }
