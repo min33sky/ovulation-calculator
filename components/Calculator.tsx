@@ -1,3 +1,4 @@
+import { useFormContext } from '@/contexts/formContext';
 import React from 'react';
 import Button from './Button';
 import Calendar from './Calendar';
@@ -7,6 +8,25 @@ import Input from './Input';
 import Outcomes from './Outcomes';
 
 export default function Calculator() {
+  const { lastPeriod, cycleLength, changeCycleLength } = useFormContext();
+
+  console.log('lastPeriod: ', lastPeriod);
+  console.log('cycle_length: ', cycleLength);
+
+  /**
+   * 생리 주기 변경 핸들러
+   */
+  const handleCycleLengthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    changeCycleLength(Number(e.target.value));
+  };
+
+  /**
+   * 빠른 선택 핸들러
+   */
+  const handleQuickSelection = (value: number) => {
+    changeCycleLength(value);
+  };
+
   return (
     <article className="my-10 md:col-span-2">
       <div className="space-y-6 bg-white">
@@ -19,7 +39,7 @@ export default function Calculator() {
               />
 
               <div className="mt-6">
-                <Calendar selected={null} onChange={() => {}} />
+                <Calendar selected={lastPeriod} onChange={() => {}} />
               </div>
             </div>
           </div>
@@ -37,9 +57,10 @@ export default function Calculator() {
                     name="cycle_length"
                     type={'number'}
                     placeholder="예. 28"
-                    value={1}
+                    value={cycleLength ?? ''}
+                    onChange={handleCycleLengthChange}
                   />
-                  <CycleLength onQuickSelection={() => {}} />
+                  <CycleLength onQuickSelection={handleQuickSelection} />
                 </div>
               </div>
 

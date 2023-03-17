@@ -1,3 +1,4 @@
+import ProviderWrapper from '@/components/ProviderWrapper';
 import { Nanum_Gothic } from 'next/font/google';
 import './globals.css';
 
@@ -32,7 +33,7 @@ export default function RootLayout({
       <body
         className={`min-h-screen bg-slate-100 ${nanumGothic.variable} font-nanum-gothic`}
       >
-        {children}
+        <ProviderWrapper>{children}</ProviderWrapper>
       </body>
     </html>
   );
