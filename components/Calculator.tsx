@@ -8,6 +8,7 @@ import CycleLength from './CycleLength';
 import Headline from './Headline';
 import Input from './Input';
 import Outcomes from './Outcomes';
+import Confetti from 'react-confetti';
 
 export default function Calculator() {
   const { lastPeriod, cycleLength, changeCycleLength, changeLastPeriod } =
@@ -137,13 +138,16 @@ export default function Calculator() {
 
         <div className="mt-6">
           {lastPeriod && cycleLength && (
-            <Outcomes
-              fertileWindow={fertileWindow}
-              expectedDueDate={expectedDueDate}
-              nextPeriod={nextPeriod}
-              ovulationDate={ovulationDate}
-              pregnancyTestDay={pregnancyTestDay}
-            />
+            <>
+              <Confetti numberOfPieces={300} recycle={false} />
+              <Outcomes
+                fertileWindow={fertileWindow}
+                expectedDueDate={expectedDueDate}
+                nextPeriod={nextPeriod}
+                ovulationDate={ovulationDate}
+                pregnancyTestDay={pregnancyTestDay}
+              />
+            </>
           )}
         </div>
       </div>
