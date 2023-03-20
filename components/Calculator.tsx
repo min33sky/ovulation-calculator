@@ -1,7 +1,7 @@
 import { useFormContext } from '@/contexts/formContext';
 import { useOutcomesContext } from '@/contexts/outcomesContext';
 import { calculateOutcomes } from '@/utils';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Button from './Button';
 import Calendar from './Calendar';
 import CycleLength from './CycleLength';
@@ -66,10 +66,13 @@ export default function Calculator() {
     changeLastPeriod(date);
   };
 
-  const handleReset = () => {
-    changeCycleLength(0);
+  /**
+   * 초기화 핸들러
+   */
+  const handleReset = useCallback(() => {
+    changeCycleLength(null);
     changeLastPeriod(null);
-  };
+  }, [changeCycleLength, changeLastPeriod]);
 
   return (
     <article className="my-10 md:col-span-2">
