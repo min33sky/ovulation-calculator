@@ -5,7 +5,7 @@
 ## Stack
 
 - React
-- Next.js
+- Next.js `13`
 - TypeScript
 - Tailwind CSS
 
